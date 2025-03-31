@@ -1,0 +1,72 @@
+.common_Container {
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    margin: 0 auto;
+    background-color: #fff;
+
+}
+
+.common_head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: rgb(131, 58, 180);
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+     */
+
+    /* background: linear-gradient(90deg, #003366 0%, #0099FF 100%); */
+    /* background: linear-gradient(90deg, #007BFF 0%, #28A745 100%); */
+
+    /* background-color: #0056b3; */
+    background-color: #007BFF;
+
+    /* background-color: #28A745 ; */
+
+
+    /* background-color: #343A40; */
+    /* background-color: #FFC107; */
+    /* background-color: #FFA000; */
+}
+
+.common_head h1 {
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    align-self: center;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.common_head h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    align-self: center;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .common_head {
+        padding: 1rem;
+        /* Reduce padding on mobile */
+    }
+
+    .common_head h1 {
+        font-size: 1.5rem;
+        /* Adjust font size for mobile */
+        margin-top: 1rem;
+        /* Adjust top margin */
+    }
+
+    .common_head h2 {
+        font-size: 1rem;
+        /* Adjust font size for mobile */
+        margin-bottom: 1rem;
+        /* Adjust bottom margin */
+    }
+}

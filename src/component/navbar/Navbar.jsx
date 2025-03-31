@@ -68,7 +68,7 @@ const Navbar = () => {
 
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/Signup">SignUp</a></li>
-                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="/admin-pannel/dashboard">Admin</a></li>
                 </ul>
                 <div className="toggle_btn" onClick={toggleNavbar}>
                     <FontAwesomeIcon icon={isOpen ? faXmark : faBars} />

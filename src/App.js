@@ -1,82 +1,136 @@
 import React from 'react';
 import './App.css'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Home from './page/home/Home';
-import Service from './page/services/Service';
-import OurClient from './page/ourclient/OurClient';
-import Jobs from './page/jobs/Jobs';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './component/navbar/Navbar';
 import Footer from './component/footer/Footer';
+import Signup from './page/signup/Signup';
+import Login from './page/login/Login';
+import Admin from './admin/Admin';
+import Home from './page/home/Home';
 import About from './page/About/About';
-// import Test from './page/home/sections/Test/Test';
-import Contact2 from './page/contact/Contact2';
-import IncomeTax from './page/IncomeTax/IncomeTax';
+import Contact from './page/contact/Contact';
+import Dashboard from './admin/dashboard/Dashboard';
+import AddGstBlog from './admin/GstBlogs/AddGstBlog/AddGstBlog';
+import AllGstBlog from './admin/GstBlogs/AllGstBlog/AllGstBlog';
+import AddIncomeTaxBlog from './admin/IncomeTaxBlog/AddIncomeTaxBlog/AddIncomeTaxBlog';
+import AllIncomeTaxBlog from './admin/IncomeTaxBlog/AllIncomeTaxBlog/AllIncomeTaxBlog';
 import Gst from './page/gst/Gst';
-import Images from './page/Images/Images';
-import Login from './page/login/Login.jsx';
-import Signup from './page/signup/Signup.jsx';
-import Dashboard from './admin/dashboard/Dashboard.jsx';
-import Admin from './admin/Admin.jsx';
-import AddProduct from './admin/addproduct/AddProduct.jsx';
-// import IncomeTaxBlog from './admin/IncomeTaxBlog/IncomeTaxBlog.jsx';
-import AddGstBlog from './admin/GstBlogs/AddGstBlog/AddGstBlog.jsx';
-import AllGstBlog from './admin/GstBlogs/AllGstBlog/AllGstBlog.jsx';
-import ProtectedRoute from './component/protected/ProtectedRoute.jsx';
-import AdminPanel from './AdminPanel.jsx';
+import IncomeTax from './page/IncomeTax/IncomeTax';
+import { StoreProvider } from './redux/configureStore';
 
+const Layout = () => {
+  const location = useLocation();
 
-const App = () => {
+  const showNavbarAndFooter = location.pathname !== '/';
 
+  // Hide Navbar & Footer only on Admin Panel pages
+  const isAdminPanel = location.pathname.startsWith('/admin-pannel');
   return (
-    <div>
-      <Router>
-
-        <Navbar />
-
+    <>
+      {!isAdminPanel && <Navbar />}
+      <StoreProvider>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/about" element={<About />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/client" element={<OurClient />} />
-          <Route path="/job" element={<Jobs />} />
-          <Route path="/incomeTax" element={<IncomeTax />} />
           <Route path="/gst" element={<Gst />} />
-          <Route path="/images" element={<Images />} />
-          <Route path="/contact" element={<Contact2 />} />
-          <Route path="/Signup" element={<Signup />} />
+          <Route path="/incomeTax" element={<IncomeTax />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
-          <Route path="/admin-panel/*" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
+          <Route path="/admin" element={<Admin />} />
 
 
+          <Route path="/admin-pannel" element={<ProtectedRouteForAdmin>
+            <Admin />
+          </ProtectedRouteForAdmin>} >
+
+            <Route path="dashboard" element={
+              <ProtectedRouteForAdmin>
+                <Dashboard />
+              </ProtectedRouteForAdmin>
+            } />
+
+            <Route path="addGstBlog" element={
+              <ProtectedRouteForAdmin>
+                <AddGstBlog />
+              </ProtectedRouteForAdmin>
+            } />
+
+            <Route path="allGstBlog" element={
+              <ProtectedRouteForAdmin>
+                <AllGstBlog />
+              </ProtectedRouteForAdmin>
+            } />
+
+            <Route path="addIncomeTaxBlog" element={
+              <ProtectedRouteForAdmin>
+                <AddIncomeTaxBlog />
+              </ProtectedRouteForAdmin>
+            } />
+            <Route path="allIncomeTaxBlog" element={
+              <ProtectedRouteForAdmin>
+                <AllIncomeTaxBlog />
+              </ProtectedRouteForAdmin>
+            } />
+            {/* <Route path="contactdetails" element={
+            <ProtectedRouteForAdmin>
+              <ContactDetails />
+            </ProtectedRouteForAdmin>
+          } /> */}
+
+
+            {/* <Route path="sidebar" element={
+            <ProtectedRouteForAdmin>
+              <Sidebar />
+            </ProtectedRouteForAdmin>
+            } /> */}
+
+
+          </Route>
+
+          {/* <Route path="/sidebar" element={<SideBar />} /> */}
 
         </Routes>
+      </StoreProvider>
 
-        <Footer />
-        <button
-          style={{
-            position: 'fixed',
-            bottom: 10,
-            right: 10,
-            backgroundColor: '#4277a8',
-            border: 'none',
-            boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px',
-            borderRadius: 30,
-            padding: 12,
-            color: 'white',
-          }}
-          onClick={() => {
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-          }}>
-          +
-          {/* <ArrowUpwardIcon /> */}
-        </button>
-      </Router>
-    </div >
+      {!isAdminPanel && <Footer />}
+    </>
   );
 };
 
-
+const App = () => (
+  <Router>
+    <Layout />
+  </Router>
+);
 
 export default App;
+
+
+// user 
+
+export const ProtectedRoute = ({ children }) => {
+  const user = localStorage.getItem('user')
+  if (user) {
+    return children
+  } else {
+    return <Navigate to={'/login'} />
+  }
+}
+
+// admin 
+
+const ProtectedRouteForAdmin = ({ children }) => {
+  const user = JSON.parse(localStorage.getItem('user'))
+  console.log("object", user);
+
+  if (user && user.email === "janvipatidar33@gmail.com") {
+    return children
+  }
+  else {
+    return <Navigate to={'/'} />
+  }
+
+}
+// test@gmail.com
+// 123456

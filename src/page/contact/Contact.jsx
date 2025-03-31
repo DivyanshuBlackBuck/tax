@@ -5,10 +5,10 @@ import AOS from 'aos';
 import { Stack } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
-import { firdb } from '../../firebase';
 import emailjs from '@emailjs/browser';
 
 import ContactImg from '../../Images/Contact4.jpg'
+import { db } from '../../firebase';
 
 const Contact = () => {
   const [firstname, setFirstname] = useState("");
@@ -59,7 +59,7 @@ const Contact = () => {
         time: Timestamp.now()
       }
       console.log("Contact", contact);
-      const contactRef = collection(firdb, "contact")
+      const contactRef = collection(db, "contact")
       console.log("CR", contactRef)
       await addDoc(contactRef, contact);
       toast.success("Thanks For Contact Us")

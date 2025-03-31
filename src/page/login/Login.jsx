@@ -23,18 +23,18 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(""); // Clear previous errors
-    
+
         try {
             // Step 1: Sign in user
             const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
-            const user = userCredential.user;    
+            const user = userCredential.user;
             // Step 2: Get user document from Firestore
             const userRef = doc(db, "users", user.uid);
             const userSnap = await getDoc(userRef); // Add 'await' here
-    
+
             if (userSnap.exists() && userSnap.data().role === "admin") {
                 const role = userSnap.data().role
-                localStorage.setItem("isAdmin",role === "admin" ? "true" : "false")
+                localStorage.setItem("isAdmin", role === "admin" ? "true" : "false")
                 alert("Login successful!");
                 navigate("/admin"); // Redirect to admin panel
             } else {
@@ -45,7 +45,7 @@ export default function Login() {
             setError("Invalid email or password. Please try again.");
         }
     };
-    
+
     return (
         <div
             className="flex justify-center items-center min-h-screen bg-cover bg-center p-8"

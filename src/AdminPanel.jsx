@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import AddProduct from "./admin/addproduct/AddProduct";
 import AddGstBlog from "./admin/GstBlogs/AddGstBlog/AddGstBlog";
 import AllGstBlog from "./admin/GstBlogs/AllGstBlog/AllGstBlog";
 import AllService from "./admin/adminService/AllService/AllService";

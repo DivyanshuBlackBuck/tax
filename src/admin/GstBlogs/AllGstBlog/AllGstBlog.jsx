@@ -26,57 +26,62 @@ function AllGstBlog() {
 
     return (
         <div className="p-8">
+            <div style={{
+                paddingTop: '100px',
+                paddingRight: '20px',
+                paddingLeft: '20px',
+            }}>
+                <Button variant="contained" component={Link} to="/admin-panel/AddGstBlog">
+                    Add Gst Blog
+                </Button>
 
-      <Button variant="contained" component={Link} to="/admin-panel/AddGstBlog">
-         Add Gst Blog
-     </Button>
+                <h2 className="text-2xl font-bold mb-6 justify-self-center flex" >All Gst Blogs</h2>
 
-            <h2 className="text-2xl font-bold mb-6 justify-self-center flex" >All Gst Blogs</h2>
+                <Table border="1">
+                    <TableHead>
+                        <TableRow style={{ backgroundColor: "#f5f5f5" }}>
+                            <TableCell>S no.</TableCell>
+                            <TableCell>Title</TableCell>
+                            <TableCell>Description</TableCell>
+                            <TableCell>Image</TableCell>
 
-            <Table border="1">
-                <TableHead>
-                    <TableRow style={{ backgroundColor: "#f5f5f5" }}>
-                        <TableCell>S no.</TableCell>
-                        <TableCell>Title</TableCell>
-                        <TableCell>Description</TableCell>
-                        <TableCell>Image</TableCell>
-                        
-                        <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {services.map((service, index) => (
-                        <TableRow key={service.id}>
-                            <TableCell>{index + 1}</TableCell>
-                            <TableCell>{service.title}</TableCell>
-                            <TableCell>{service.description}</TableCell>
-                            <TableCell>
-                                <img src={service.image} alt="Service" width="50" height="50" />
-                            </TableCell>
-                          
-                            <TableCell>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    size="small"
-                                    onClick={() => updateService(service.id)}
-                                    style={{ marginRight: "8px" }}
-                                >
-                                    Update
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    color="error"
-                                    size="small"
-                                    onClick={() => deleteService(service.id)}
-                                >
-                                    Delete
-                                </Button>
-                            </TableCell>
+                            <TableCell>Actions</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHead>
+                    <TableBody>
+                        {services.map((service, index) => (
+                            <TableRow key={service.id}>
+                                <TableCell>{index + 1}</TableCell>
+                                <TableCell>{service.title}</TableCell>
+                                <TableCell>{service.description}</TableCell>
+                                <TableCell>
+                                    <img src={service.image} alt="Service" width="50" height="50" />
+                                </TableCell>
+
+                                <TableCell>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="small"
+                                        onClick={() => updateService(service.id)}
+                                        style={{ marginRight: "8px" }}
+                                    >
+                                        Update
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="error"
+                                        size="small"
+                                        onClick={() => deleteService(service.id)}
+                                    >
+                                        Delete
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
         </div>
     );
 }
