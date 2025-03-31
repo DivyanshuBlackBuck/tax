@@ -77,9 +77,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                     <ListItemText primary="All Income Tax Blog" />
                 </ListItem>
 
-                <ListItem button component={Link} to="/productdesc" onClick={toggleSidebar}>
+                <ListItem button component={Link} to="/admin-pannel/addService" onClick={toggleSidebar}>
                     <MdAddShoppingCart style={{ fontSize: 30, marginRight: 20 }} />
-                    <ListItemText primary="Order Details" />
+                    <ListItemText primary="Add Service" />
                 </ListItem>
 
                 <ListItem button component={Link} to="/productdesc" onClick={() => {

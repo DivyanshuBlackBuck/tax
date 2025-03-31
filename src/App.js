@@ -18,6 +18,7 @@ import Gst from './page/gst/Gst';
 import IncomeTax from './page/IncomeTax/IncomeTax';
 import { StoreProvider } from './redux/configureStore';
 import ProtectedRoute from './component/protected/ProtectedRoute';
+import AddService from './admin/adminService/AddService/AddService';
 
 const Layout = () => {
   const location = useLocation();
@@ -72,11 +73,11 @@ const Layout = () => {
                 <AllIncomeTaxBlog />
               </ProtectedRoute>
             } />
-            {/* <Route path="contactdetails" element={
-            <ProtectedRouteForAdmin>
-              <ContactDetails />
-            </ProtectedRouteForAdmin>
-          } /> */}
+            <Route path="addService" element={
+              <ProtectedRoute>
+                <AddService />
+              </ProtectedRoute>
+            } />
 
 
             {/* <Route path="sidebar" element={

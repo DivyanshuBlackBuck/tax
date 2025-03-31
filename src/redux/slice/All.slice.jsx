@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getGstBlogsApi, gstBlogsAddApi } from "./All.api";
+import { addServicesApi, getGstBlogsApi, gstBlogsAddApi } from "./All.api";
 
 
 const initialState = {
@@ -10,6 +10,16 @@ const initialState = {
     getGstBlogResponse: undefined,
     getGstBlogError: undefined,
     getGstBlogLoading: false,
+
+
+    addServiceResponse: undefined,
+    addServiceError: undefined,
+    addServiceLoading: false,
+
+    getServiceResponse: undefined,
+    getServiceError: undefined,
+    getServiceLoading: false,
+
 };
 
 export const addGstBlogs = createAsyncThunk(
@@ -27,6 +37,28 @@ export const getGstBlogs = createAsyncThunk(
     'gst/getGstBlogs', async (payload, { rejectWithValue }) => {
         try {
             const response = await getGstBlogsApi()
+            return response
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
+export const addService = createAsyncThunk(
+    'service/addservice', async (payload, { rejectWithValue }) => {
+        try {
+            const response = await addServicesApi(payload)
+            return response
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
+
+export const getService = createAsyncThunk(
+    'service/getservice', async (payload, { rejectWithValue }) => {
+        try {
+            const response = await getService()
             return response
         } catch (error) {
             return rejectWithValue(error)
@@ -72,6 +104,42 @@ const AuthSlice = createSlice({
                 state.getGstBlogError = action.payload;
                 state.getGstBlogLoading = false;
             })
+
+            //  SERVICES
+
+            .addCase(addService.pending, (state, action) => {
+                state.addServiceResponse = undefined;
+                state.addServiceError = undefined;
+                state.addServiceLoading = true;
+            })
+            .addCase(addService.fulfilled, (state, action) => {
+                state.addServiceResponse = action.payload;
+                state.addServiceError = undefined;
+                state.addServiceLoading = false;
+            })
+            .addCase(addService.rejected, (state, action) => {
+                state.addServiceResponse = undefined;
+                state.addServiceError = action.payload;
+                state.addServiceLoading = false;
+            })
+
+            .addCase(getService.pending, (state, action) => {
+                state.getServiceResponse = undefined;
+                state.getServiceError = undefined;
+                state.getServiceLoading = true;
+            })
+            .addCase(getService.fulfilled, (state, action) => {
+                state.getServiceResponse = action.payload;
+                state.getServiceError = undefined;
+                state.getServiceLoading = false;
+            })
+            .addCase(getService.rejected, (state, action) => {
+                state.getServiceResponse = undefined;
+                state.getServiceError = action.payload;
+                state.getServiceLoading = false;
+            })
+
+
     }
 })
 

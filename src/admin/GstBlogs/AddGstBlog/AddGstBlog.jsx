@@ -25,7 +25,6 @@ const AddGstBlog = () => {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
@@ -37,8 +36,7 @@ const AddGstBlog = () => {
     }
     addGstBlogs(data)
   };
-  console.log("gstBlogResponse", gstBlogResponse);
-  console.log("gstBlogError", gstBlogError);
+ 
 
   useEffect(() => {
     if (gstBlogResponse && loading) {

@@ -27,3 +27,23 @@ export const getGstBlogsApi = async () => {
         console.error("Error fetching blogs:", error);
     }
 };
+
+export const addServicesApi = async (payload) => {
+    console.log("Payloag janvi", payload)
+    try {
+        await addDoc(collection(db, "services"), {
+            name: payload.name,
+            title: payload.title,
+            image: payload.image,
+            titleDescription: payload.titleDescription,
+            mainDescription: payload.mainDescription,
+            faq: payload.faq,
+            timestamp: serverTimestamp() // Firebase timestamp
+        });
+        console.log("Hiii")
+        return ("Document successfully added!");
+    } catch (error) {
+        console.log("error", error)
+        return ("Error adding document: ", error);
+    }
+}

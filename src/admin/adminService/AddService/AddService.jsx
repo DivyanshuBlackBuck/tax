@@ -3,40 +3,57 @@ import './AddService.css';
 import { Button, Grid, Stack } from '@mui/material';
 import TextInput from '../../../component/TextInput';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useBlogsRedux } from '../../../redux/reduxHooks';
 
 const AddService = () => {
+  const {addService,addServiceError,addServiceLoading,addServiceResponse} = useBlogsRedux()
+  const [name, setName] = useState('');
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [titleDescription, setTitleDescription] = useState('');
+  const [mainDescription, setMainDescription] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [points, setPoints] = useState([""]); // Initially one empty point field
+  const [faq, setfaq] = useState([{ title: "", description: "" }]); // Dynamic faq with titles
+  const [loading, setLoading] = useState(false);
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImage(reader.result); // Store Base64 string
+      };
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Form Submitted');
+    setLoading(true)
+    const data = {
+      name,
+      title,
+      titleDescription,
+      mainDescription,
+      image,
+      faq
+    }
+    addService(data)
   };
 
   const addPoint = () => {
-    setPoints([...points, ""]); // Add an empty point field
+    setfaq([...faq, { title: "", description: "" }]); // Add empty point field with title
   };
 
   const removePoint = (index) => {
-    const updatedPoints = points.filter((_, i) => i !== index); // Remove the point at the specified index
-    setPoints(updatedPoints);
+    setfaq(faq.filter((_, i) => i !== index)); // Remove the point at the specified index
   };
 
-  const handlePointChange = (e, index) => {
-    const updatedPoints = points.map((point, i) =>
-      i === index ? e.target.value : point
+  const   handlePointChange = (index, field, value) => {
+    const updatedfaq = faq.map((point, i) =>
+      i === index ? { ...point, [field]: value } : point
     );
-    setPoints(updatedPoints);
+    setfaq(updatedfaq);
   };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8">
@@ -47,12 +64,12 @@ const AddService = () => {
             <label htmlFor="title">Service Name</label>
             <input
               type="text"
-              id="title"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              id="name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
-              className={title ? 'filled' : ''}
+              className={name ? 'filled' : ''}
             />
           </div>
 
@@ -70,14 +87,25 @@ const AddService = () => {
           </div>
 
           <div className="form-field">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="titleDescription">Title Description</label>
             <textarea
-              id="description"
-              name="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              id="titleDescription"
+              name="titleDescription"
+              value={titleDescription}
+              onChange={(e) => setTitleDescription(e.target.value)}
               required
-              className={description ? 'filled' : ''}
+              className={titleDescription ? 'filled' : ''}
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="mainDescription">Main Description</label>
+            <textarea
+              id="mainDescription"
+              name="mainDescription"
+              value={mainDescription}
+              onChange={(e) => setMainDescription(e.target.value)}
+              required
+              className={mainDescription ? 'filled' : ''}
             />
           </div>
           <div className="form-field">
@@ -98,7 +126,7 @@ const AddService = () => {
           </div>
           <div className="form-field">
 
-            {points.map((point, index) => (
+            {/* {faq.map((point, index) => (
               <div key={index} className="point-field relative flex items-center gap-2  p-2 rounded-md">
                 <input
                   type="text"
@@ -117,8 +145,37 @@ const AddService = () => {
                   }}
                 />
               </div>
+            ))} */}
+            <h3>Dynamic faq</h3>
+            {faq.map((point, index) => (
+              <div key={index}>
+                <input
+                  type="text"
+                  placeholder="Point Title"
+                  value={point.title}
+                  onChange={(e) => handlePointChange(index, "title", e.target.value)}
+                />
+                <textarea
+                  type="text"
+                  placeholder="Point Description"
+                  value={point.description}
+                  onChange={(e) => handlePointChange(index, "description", e.target.value)}
+                  style={{ marginTop: '10px' }}
+                />
+                {/* <button type="button" onClick={() => removePoint(index)}>Remove</button> */}
+                <CancelIcon
+                  key={`cancel-icon-${index}`}
+                  color="error"
+                  onClick={() => removePoint(index)}
+                  style={{
+                    cursor: "pointer",
+                  }}
+                />
+              </div>
+
             ))}
 
+            {/* <button type="button" onClick={addPoint}>Add Point</button> */}
             <button
               type="button"
               className="add-point-btn"
