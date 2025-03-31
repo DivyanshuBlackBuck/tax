@@ -36,9 +36,11 @@ export default function Login() {
                 const role = userSnap.data().role
                 localStorage.setItem("isAdmin", role === "admin" ? "true" : "false")
                 alert("Login successful!");
-                navigate("/admin"); // Redirect to admin panel
+                navigate("/admin-pannel/dashboard"); // Redirect to admin panel
             } else {
-                setError("You are not authorized to access admin panel.");
+                alert("Login successful!");
+                navigate('/')
+                // setError("You are not authorized to access admin panel.");
             }
         } catch (error) {
             console.error("Login Error:", error.message);

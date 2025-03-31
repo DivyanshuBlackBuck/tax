@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc,collection,where,query, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
@@ -26,15 +26,50 @@ export default function Signup() {
             await setDoc(doc(db, "users", user.uid), {
                 name: formData.name,
                 email: formData.email,
+                password:formData.password,
                 role: "user",
             })
             alert("Sign-up successful!");
             navigate("/login");
         } catch (err) {
-            console.error("Sign-up error:", err.message);
+            console.error("Error Code:", err.code);
+            console.error("Error Message:", err.message);
             setError(err.message);
-        }
+        }        
     };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     setError(null);
+
+    //     try {
+    //         const usersRef = collection(db, "users");
+    //         const q = query(usersRef, where("email", "==", formData.email));
+    //         const querySnapshot = await getDocs(q);
+
+    //         if (!querySnapshot.empty) {
+    //             setError("Email already registered!");
+    //             return;
+    //         }
+
+    //         const userId = Date.now().toString();
+
+    //         // Save user data in Firestore
+    //         await setDoc(doc(db, "users", userId), {
+    //             name: formData.name,
+    //             email: formData.email,
+    //             password: formData.password, 
+    //             role: "user",
+    //         });
+
+    //         alert("Sign-up successful!");
+    //         navigate("/login");
+
+    //     } catch (err) {
+    //         console.error("Firestore Error:", err);
+    //         setError(err.message);
+    //     }
+    // };
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8">
@@ -56,7 +91,7 @@ export default function Signup() {
                         className="w-full p-5 text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         required
                     />
-                    <input
+                    {/* <input
                         type="text"
                         name="role"
                         placeholder="Role"
@@ -64,7 +99,7 @@ export default function Signup() {
                         onChange={handleChange}
                         className="w-full p-5 text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         required
-                    />
+                    /> */}
                     <input
                         type="email"
                         name="email"

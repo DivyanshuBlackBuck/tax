@@ -17,9 +17,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const logout = () => {
-        localStorage.clear('user');
-        window.location.href = '/login'
-    }
+        // Clear localStorage
+        localStorage.removeItem('user');
+        localStorage.setItem('isAdmin', false); // Ensure isAdmin is false
+    
+        // Redirect to login
+        window.location.href = '/login';
+    };
+    
 
     return (
         <Drawer
@@ -36,7 +41,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             }}
         >
             <List sx={{ marginTop: 10 }}>
-                <ListItem button component={Link} to="/home" onClick={toggleSidebar}>
+                <ListItem button component={Link} to="/" onClick={toggleSidebar}>
                     <IoIosHome style={{ fontSize: 30, marginRight: 20 }} />
 
                     <ListItemText primary="Home" />

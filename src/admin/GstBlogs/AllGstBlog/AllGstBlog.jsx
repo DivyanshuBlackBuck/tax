@@ -31,7 +31,7 @@ function AllGstBlog() {
                 paddingRight: '20px',
                 paddingLeft: '20px',
             }}>
-                <Button variant="contained" component={Link} to="/admin-panel/AddGstBlog">
+                <Button variant="contained" component={Link} to="/admin-pannel/addGstBlog">
                     Add Gst Blog
                 </Button>
 

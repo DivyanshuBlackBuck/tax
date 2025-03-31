@@ -17,6 +17,7 @@ import AllIncomeTaxBlog from './admin/IncomeTaxBlog/AllIncomeTaxBlog/AllIncomeTa
 import Gst from './page/gst/Gst';
 import IncomeTax from './page/IncomeTax/IncomeTax';
 import { StoreProvider } from './redux/configureStore';
+import ProtectedRoute from './component/protected/ProtectedRoute';
 
 const Layout = () => {
   const location = useLocation();
@@ -37,40 +38,39 @@ const Layout = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<Admin />} />
 
 
-          <Route path="/admin-pannel" element={<ProtectedRouteForAdmin>
+          <Route path="/admin-pannel" element={<ProtectedRoute>
             <Admin />
-          </ProtectedRouteForAdmin>} >
+          </ProtectedRoute>} >
 
             <Route path="dashboard" element={
-              <ProtectedRouteForAdmin>
+              <ProtectedRoute>
                 <Dashboard />
-              </ProtectedRouteForAdmin>
+              </ProtectedRoute>
             } />
 
             <Route path="addGstBlog" element={
-              <ProtectedRouteForAdmin>
+              <ProtectedRoute>
                 <AddGstBlog />
-              </ProtectedRouteForAdmin>
+              </ProtectedRoute>
             } />
 
             <Route path="allGstBlog" element={
-              <ProtectedRouteForAdmin>
+              <ProtectedRoute>
                 <AllGstBlog />
-              </ProtectedRouteForAdmin>
+              </ProtectedRoute>
             } />
 
             <Route path="addIncomeTaxBlog" element={
-              <ProtectedRouteForAdmin>
+              <ProtectedRoute>
                 <AddIncomeTaxBlog />
-              </ProtectedRouteForAdmin>
+              </ProtectedRoute>
             } />
             <Route path="allIncomeTaxBlog" element={
-              <ProtectedRouteForAdmin>
+              <ProtectedRoute>
                 <AllIncomeTaxBlog />
-              </ProtectedRouteForAdmin>
+              </ProtectedRoute>
             } />
             {/* <Route path="contactdetails" element={
             <ProtectedRouteForAdmin>
@@ -107,30 +107,28 @@ const App = () => (
 export default App;
 
 
-// user 
 
-export const ProtectedRoute = ({ children }) => {
-  const user = localStorage.getItem('user')
-  if (user) {
-    return children
-  } else {
-    return <Navigate to={'/login'} />
-  }
-}
+// export const ProtectedRoute = ({ children }) => {
+//   const user = localStorage.getItem('user')
+//   if (user) {
+//     return children
+//   } else {
+//     return <Navigate to={'/login'} />
+//   }
+// }
 
-// admin 
 
-const ProtectedRouteForAdmin = ({ children }) => {
-  const user = JSON.parse(localStorage.getItem('user'))
-  console.log("object", user);
+// const ProtectedRouteForAdmin = ({ children }) => {
+//   const user = JSON.parse(localStorage.getItem('user'))
+//   console.log("object", user);
 
-  if (user && user.email === "janvipatidar33@gmail.com") {
-    return children
-  }
-  else {
-    return <Navigate to={'/'} />
-  }
+//   if (user && user.email === "janvipatidar33@gmail.com") {
+//     return children
+//   }
+//   else {
+//     return <Navigate to={'/'} />
+//   }
 
-}
+// }
 // test@gmail.com
 // 123456

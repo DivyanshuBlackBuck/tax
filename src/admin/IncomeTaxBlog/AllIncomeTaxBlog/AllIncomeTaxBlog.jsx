@@ -66,9 +66,9 @@ function AllIncomeTaxBlog() {
                 paddingRight: '30px',
                 paddingLeft: '30px',
             }}>
-                {/* <Button variant="contained" component={Link} to="/admin-panel/AddIncomeTaxBlog">
+                <Button variant="contained" component={Link} to="/admin-pannel/addIncomeTaxBlog">
                     Add Income Tax Blog
-                </Button> */}
+                </Button>
                 <Table border="1">
                     <TableHead>
                         <TableRow style={{ backgroundColor: "#f5f5f5" }}>
