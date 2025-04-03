@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addServicesApi, getGstBlogsApi, gstBlogsAddApi } from "./All.api";
+import { addServicesApi, getGstBlogsApi, getServicesApi, gstBlogsAddApi } from "./All.api";
 
 
 const initialState = {
@@ -19,6 +19,8 @@ const initialState = {
     getServiceResponse: undefined,
     getServiceError: undefined,
     getServiceLoading: false,
+
+    selectedService: {}
 
 };
 
@@ -58,7 +60,7 @@ export const addService = createAsyncThunk(
 export const getService = createAsyncThunk(
     'service/getservice', async (payload, { rejectWithValue }) => {
         try {
-            const response = await getService()
+            const response = await getServicesApi()
             return response
         } catch (error) {
             return rejectWithValue(error)
@@ -66,11 +68,28 @@ export const getService = createAsyncThunk(
     }
 )
 
+// Selected Teams
+
+export const setSelectedService = createAsyncThunk(
+    'service/setSelectedService',
+    async (payload, { rejectWithValue }) => {
+        try {
+            return payload;
+        } catch (error) {
+            // Handle any other errors that might occur during the request
+            return rejectWithValue(error);
+        }
+    },
+);
+
+
 const AuthSlice = createSlice({
     name: 'AuthSlice',
     initialState,
     reducers: {
-
+        resetSelectedServiceData: state => {
+            state.selectedService = {};
+        },
     },
     extraReducers: builder => {
         builder
@@ -106,6 +125,13 @@ const AuthSlice = createSlice({
             })
 
             //  SERVICES
+
+            //------------------------- For Selected Service --------------------------
+
+            .addCase(setSelectedService.fulfilled, (state, action) => {
+                state.selectedService = action.payload;
+            })
+
 
             .addCase(addService.pending, (state, action) => {
                 state.addServiceResponse = undefined;

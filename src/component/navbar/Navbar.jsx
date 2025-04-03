@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Logo from '../../Images/LogoJPG.png';
+import { useBlogsRedux } from '../../redux/reduxHooks';
 
 const Navbar = () => {
+    const { getServiceResponse, setSelectedService } = useBlogsRedux()
+
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [serviceDropdown, setServiceDropdown] = useState(false);
@@ -13,11 +16,13 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
+
     return (
         <header>
             <div className="navbar">
                 <div className="logo">
                     <img src={Logo} alt="Logo" />
+                    {/* <h1>NEW</h1> */}
                 </div>
                 <ul className={`links ${isOpen ? 'open' : ''}`}>
                     <li><a href="/">Home</a></li>
@@ -35,6 +40,17 @@ const Navbar = () => {
                         {serviceDropdown && (
                             <div className="services-menu">
                                 <div className="column">
+                                    {
+                                        getServiceResponse?.map((item) => {
+                                            return (
+                                                <button onClick={() => setSelectedService(item)}>
+                                                    <a href="/service">{item?.name}</a>
+                                                </button>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                {/* <div className="column">
                                     <a href="/service1">GST Consultancy</a>
                                     <a href="/service2">Income Tax</a>
                                     <a href="/service3">Accounting</a>
@@ -44,7 +60,7 @@ const Navbar = () => {
                                     <a href="/service5">Pan/Tan Registration</a>
                                     <a href="/service6">Firms and Society Reg.</a>
                                     <a href="/service7">Other Consultancy</a>
-                                </div>
+                                </div> */}
                             </div>
                         )}
                     </li>

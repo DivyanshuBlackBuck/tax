@@ -5,10 +5,12 @@ import { LuShare2 } from "react-icons/lu";
 import { MdOutlineAddRoad } from "react-icons/md";
 import { TbMapCheck } from "react-icons/tb";
 import { GiModernCity } from "react-icons/gi";
+import { useBlogsRedux } from '../../redux/reduxHooks';
 
 
 const Service = () => {
-
+  const { selectedService } = useBlogsRedux()
+  console.log("selectedService", selectedService);
   const data = [
     {
       id: 1,

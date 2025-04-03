@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addGstBlogs, addService, getGstBlogs, getService } from "./slice/All.slice";
+import { addGstBlogs, addService, getGstBlogs, getService, setSelectedService } from "./slice/All.slice";
 
 export function useBlogsRedux() {
   const res = useSelector((state) => {
@@ -26,10 +26,13 @@ export function useBlogsRedux() {
     getServiceError: res?.getServiceError,
     getServiceLoading: res?.getServiceLoading,
 
+    selectedService: res?.selectedService,
+
 
     addGstBlogs: (data) => dispatch(addGstBlogs(data)),
     getGstBlogs: () => dispatch(getGstBlogs()),
 
+    setSelectedService: (data) => dispatch(setSelectedService(data)),
     addService: (data) => dispatch(addService(data)),
     getService: () => dispatch(getService())
   };

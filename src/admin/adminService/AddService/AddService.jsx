@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddService.css';
 import { Button, Grid, Stack } from '@mui/material';
 import TextInput from '../../../component/TextInput';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useBlogsRedux } from '../../../redux/reduxHooks';
+import { toast, ToastContainer } from 'react-toastify';
 
 const AddService = () => {
-  const {addService,addServiceError,addServiceLoading,addServiceResponse} = useBlogsRedux()
+  const { addService, addServiceError, addServiceLoading, addServiceResponse } = useBlogsRedux()
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
   const [titleDescription, setTitleDescription] = useState('');
@@ -26,6 +27,28 @@ const AddService = () => {
       };
     }
   };
+
+  useEffect(() => {
+
+  }, [addServiceResponse, addServiceError])
+
+
+
+  useEffect(() => {
+    if (addServiceResponse && loading) {
+      toast.success('Service saved successfully!');
+      setName('');
+      setTitle('');
+      setImage(null);
+      setTitleDescription('');
+      setMainDescription('');
+      setfaq([{ title: "", description: "" }])
+    }
+    if (addServiceError && loading) {
+      toast.error('Service Not saved')
+    }
+  }, [addServiceResponse, addServiceError])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,7 +72,7 @@ const AddService = () => {
     setfaq(faq.filter((_, i) => i !== index)); // Remove the point at the specified index
   };
 
-  const   handlePointChange = (index, field, value) => {
+  const handlePointChange = (index, field, value) => {
     const updatedfaq = faq.map((point, i) =>
       i === index ? { ...point, [field]: value } : point
     );
@@ -61,10 +84,11 @@ const AddService = () => {
         <h2 className="text-4xl font-bold text-gray-700 mb-10">Add Service</h2>
         <form className="animated-form" onSubmit={handleSubmit}>
           <div className="form-field">
-            <label htmlFor="title">Service Name</label>
+            {/* <label htmlFor="title">Service Name</label> */}
             <input
               type="text"
               id="name"
+              placeholder='Service Name'
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -74,10 +98,11 @@ const AddService = () => {
           </div>
 
           <div className="form-field">
-            <label htmlFor="title">Title</label>
+            {/* <label htmlFor="title">Title</label> */}
             <input
               type="text"
               id="title"
+              placeholder='Title'
               name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -87,10 +112,11 @@ const AddService = () => {
           </div>
 
           <div className="form-field">
-            <label htmlFor="titleDescription">Title Description</label>
+            {/* <label htmlFor="titleDescription">Title Description</label> */}
             <textarea
               id="titleDescription"
               name="titleDescription"
+              placeholder='Title Description'
               value={titleDescription}
               onChange={(e) => setTitleDescription(e.target.value)}
               required
@@ -98,10 +124,11 @@ const AddService = () => {
             />
           </div>
           <div className="form-field">
-            <label htmlFor="mainDescription">Main Description</label>
+            {/* <label htmlFor="mainDescription">Main Description</label> */}
             <textarea
               id="mainDescription"
               name="mainDescription"
+              placeholder='Main Description'
               value={mainDescription}
               onChange={(e) => setMainDescription(e.target.value)}
               required
@@ -146,7 +173,7 @@ const AddService = () => {
                 />
               </div>
             ))} */}
-            <h3>Dynamic faq</h3>
+            {/* <h3>Dynamic faq</h3> */}
             {faq.map((point, index) => (
               <div key={index}>
                 <input
@@ -189,6 +216,7 @@ const AddService = () => {
           <button type="submit" className="submit-button">Submit</button>
         </form>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

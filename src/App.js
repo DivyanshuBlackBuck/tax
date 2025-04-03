@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './component/navbar/Navbar';
@@ -19,6 +19,9 @@ import IncomeTax from './page/IncomeTax/IncomeTax';
 import { StoreProvider } from './redux/configureStore';
 import ProtectedRoute from './component/protected/ProtectedRoute';
 import AddService from './admin/adminService/AddService/AddService';
+import { useBlogsRedux } from './redux/reduxHooks';
+import Contact2 from './page/contact/Contact2';
+import Service from './page/services/Service';
 
 const Layout = () => {
   const location = useLocation();
@@ -27,18 +30,21 @@ const Layout = () => {
 
   // Hide Navbar & Footer only on Admin Panel pages
   const isAdminPanel = location.pathname.startsWith('/admin-pannel');
+
+
   return (
     <>
-      {!isAdminPanel && <Navbar />}
       <StoreProvider>
+        {!isAdminPanel && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/gst" element={<Gst />} />
           <Route path="/incomeTax" element={<IncomeTax />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<Contact2 />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/service" element={<Service />} />
 
 
           <Route path="/admin-pannel" element={<ProtectedRoute>

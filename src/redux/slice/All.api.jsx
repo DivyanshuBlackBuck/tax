@@ -47,3 +47,17 @@ export const addServicesApi = async (payload) => {
         return ("Error adding document: ", error);
     }
 }
+
+
+export const getServicesApi = async () => {
+    try {
+        const querySnapshot = await getDocs(collection(db, "services"));
+        const serviceList = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        return (serviceList);
+    } catch (error) {
+        console.log("Error fetching serviceList:", error);
+    }
+};
