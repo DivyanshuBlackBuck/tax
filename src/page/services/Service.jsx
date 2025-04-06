@@ -1,82 +1,98 @@
-import React from 'react'
+import React from 'react';
 import './Service.css';
-import { MdCarRental } from "react-icons/md";
-import { LuShare2 } from "react-icons/lu";
-import { MdOutlineAddRoad } from "react-icons/md";
-import { TbMapCheck } from "react-icons/tb";
-import { GiModernCity } from "react-icons/gi";
-import { useBlogsRedux } from '../../redux/reduxHooks';
-
 
 const Service = () => {
-  const { selectedService } = useBlogsRedux()
-  console.log("selectedService", selectedService);
-  const data = [
-    {
-      id: 1,
-      title: "Banking / Securities",
-      des: "ICICI Securities Kotak Securities HDFC Sales ING Vysya Reliance Securities",
-      icon: <MdCarRental />,
-      bg: "#079af0",
-    },
-    {
-      id: 2,
-      title: "Insurance",
-      des: "ICICI Prudential Life Insurance Birla Sun Life Insurance Kotak Life Insurance HDFC Life Insurance Met Life Insurance Bharti AXA Future Generali",
-      icon: <LuShare2 />,
-      bg: "#fea632",
-    },
-    {
-      id: 3,
-      title: "Corporate / Business",
-      des: "Mittal Corp Guruji Products Capital Aim LMS Inida Synoris Technologies Radisson Blu Covetus Technologies Future Technologies Stellar Furniture Systematix Infotech",
-      icon: <MdOutlineAddRoad />,
-      bg: "rgb(255, 72, 72)",
-    },
-    {
-      id: 4,
-      title: "All-India Permits",
-      des: "GGowithcar.com cars come with an All-India Tourist Permit so that you can drive from Kashmir to",
-      icon: <TbMapCheck />,
-      bg: "#00b072",
-    },
-    {
-      id: 5,
-      title: "Endless Opportunities",
-      des: "The vehicles you rent from Gowithcar.com can be used for trips out of the city or daily travels through town. Gowithcar.com also provides cars for pick-up and drop-off services at Indore airports and Indore bus and train stations.",
-      icon: <GiModernCity />,
-      bg: "#151515",
-    },
-    {
-      id: 6,
-      title: "Insurance",
-      des: "ICICI Prudential Life Insurance Birla Sun Life Insurance Kotak Life Insurance HDFC Life Insurance Met Life Insurance Bharti AXA Future Generali",
-      icon: <LuShare2 />,
-      bg: "#fea632",
-    },
-  ];
-
   return (
-    <div className='Service_Container'>
-      <div className="Service_head"  >
-        <h1>OurClient Page</h1>
-        <h2>Home / OurClient Page</h2>
+    <div className="service-page">
+      <div className="service-header">
+        <h1>Service Single</h1>
+        <p>Home &gt; Service Single</p>
       </div>
 
-      <div className="Service_main2">
-        <div className="Service_cardGrid">
-          {data?.map((item, index) => (
-            <div className="Service_cardMain" key={item?.id}>
+      <div className="service-content">
+        <div className="service-sidebar">
+          <div className="all-services">
+            <h3>All Services</h3>
+            <ul>
+              <li>Tax Planning</li>
+              <li>Personal Tax</li>
+              <li>Insurance Tax</li>
+              <li>Corporate Tax</li>
+              <li>Tax Audit Support</li>
+              <li>Investment Advisor</li>
+              <li>Tax Advisory</li>
+              <li>International Tax</li>
+            </ul>
+          </div>
+          <div className="downloads">
+            <h3>Download</h3>
+            <button>Download Brochure</button>
+            <button>Download Application</button>
+          </div>
+        </div>
 
-              <h4 className="Service_title">{item?.title}</h4>
-              <div className="Service_des">{item.des}</div>
-            </div>
-          ))}
+        <div className="service-details">
+          <img
+            src="https://img.freepik.com/free-vector/tax-service-branding-identity-corporate-vector-logo-bundle-design_460848-13825.jpg"
+            alt="Tax Audit Support"
+            className="main-img"
+          />
+          <h2>Tax Audit Support</h2>
+          <p>
+            Sed perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
+          </p>
+          <p>
+            But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born...
+          </p>
 
+          <div className="work-images">
+            <img
+              src="https://legaldev.in/assets/img/services/professional-tax.webp"
+              alt="Work Process"
+            />
+            <img
+              src="https://www.taxhelpdesk.in/wp-content/uploads/2020/05/Goods-and-Service-Tax-Registration.png"
+              alt="Work Meeting"
+            />
+          </div>
+
+          <div className="work-process">
+            <h3>Our Work Process</h3>
+            <ul>
+              <li>We create a plan for your taxes</li>
+              <li>Understand your income and goals</li>
+              <li>Assign a dedicated advisor</li>
+              <li>Make sure returns are filed on time</li>
+              <li>Regular updates and reports</li>
+            </ul>
+          </div>
+
+          <div className="service-features">
+            <h3>Service Features</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Case in molestiae quam...
+            </p>
+          </div>
+
+          <div className="faq-section">
+            <h3>Frequently Asked Questions</h3>
+            <details>
+              <summary>What is tax audit support?</summary>
+              <p>It’s assistance during an audit to ensure compliance with tax laws and representation.</p>
+            </details>
+            <details>
+              <summary>Do I need tax audit services?</summary>
+              <p>If you're running a business or have complex returns, it’s recommended.</p>
+            </details>
+            <details>
+              <summary>Is my data secure with you?</summary>
+              <p>Yes, we maintain confidentiality and data security protocols.</p>
+            </details>
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Service
+export default Service;

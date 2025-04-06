@@ -34,7 +34,7 @@ const Navbar = () => {
                         onMouseEnter={() => setServiceDropdown(true)}
                     // onMouseLeave={() => setServiceDropdown(false)}
                     >
-                        <a href="/services">
+                        <a href="/service">
                             Services <FontAwesomeIcon icon={faChevronDown} className="dropdown-icon" />
                         </a>
                         {serviceDropdown && (
@@ -85,6 +85,7 @@ const Navbar = () => {
                     <li><a href="/contact">Contact</a></li>
                     <li><a href="/Signup">SignUp</a></li>
                     <li><a href="/admin-pannel/dashboard">Admin</a></li>
+                    <li><a href="/test">Test</a></li>
                 </ul>
                 <div className="toggle_btn" onClick={toggleNavbar}>
                     <FontAwesomeIcon icon={isOpen ? faXmark : faBars} />

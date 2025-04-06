@@ -22,6 +22,7 @@ import AddService from './admin/adminService/AddService/AddService';
 import { useBlogsRedux } from './redux/reduxHooks';
 import Contact2 from './page/contact/Contact2';
 import Service from './page/services/Service';
+import Temp from './page/Test/Temp';
 
 const Layout = () => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const Layout = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/service" element={<Service />} />
+          <Route path="/test" element={<Temp />} />
 
 
           <Route path="/admin-pannel" element={<ProtectedRoute>
