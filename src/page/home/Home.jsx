@@ -38,6 +38,7 @@ import Description from "./sections/description/Description";
 import { motion } from 'framer-motion';
 
 export default function Home() {
+  
   return (
     <div className="app">
       {/* <div className="notification">URGENT NOTIFICATION REAL CONTINUE</div> */}
