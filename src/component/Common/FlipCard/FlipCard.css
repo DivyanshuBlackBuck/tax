@@ -1,7 +1,6 @@
 .flip-card {
-  width: 400px;
-  height: 300px;
-  /* Fixed height for both sides */
+  width: 350px;
+  height: 250px;
   perspective: 1200px;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .flip-card-front h2 {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .flip-card-front {
@@ -55,13 +54,15 @@
   background-color: white;
   color: black;
   transform: rotateY(180deg);
+  font-size: 14px;
+  font-weight: 400;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .flip-card {
-    width: 400px;
-    height: 300px;
+    width: 350px;
+    height: 250px;
   }
 
   .flip-card-front,

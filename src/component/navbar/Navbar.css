@@ -3,15 +3,15 @@ header {
   top: 0;
   z-index: 1000;
   width: 100%;
-  padding: 0 2rem;
-  background-color: #fff;
+  padding: 0 1rem;
+  background-color: white;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   /* Stronger Bottom Shadow */
 }
 
 .navbar {
   width: 100%;
-  height: 90px;
+  height: 70px;
   /* Increased height from 80px to 90px */
   max-width: 1600px;
   margin: 0 auto;
@@ -20,10 +20,9 @@ header {
   justify-content: space-between;
 }
 
-
 .logo img {
-  height: 6rem;
-  width: 13rem;
+  height: 4rem;
+  width: 10rem;
 }
 
 .links {
@@ -37,13 +36,18 @@ header {
 }
 
 .links a {
-  color: #000;
+  /* color: #000;
   text-decoration: none;
   padding: 0.3rem;
   display: block;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
-  position: relative;
+  position: relative; */
+
+  margin: 0 12px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
 }
 
 /* Underline Animation */
@@ -93,6 +97,20 @@ header {
   cursor: pointer;
   color: #000;
 }
+.btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  justify-content: center;
+  align-self: center;
+}
+
+.primary {
+  background: #2f8f5b;
+  color: #fff;
+}
 
 .toggle_btn i {
   font-size: 1.5rem;
@@ -140,8 +158,6 @@ header {
   justify-content: center;
 }
 
-
-
 /* ===================== Unique Updates Dropdown ===================== */
 /* ===================== Unique Updates Dropdown (With Animation) ===================== */
 .updates-dropdown {
@@ -160,7 +176,8 @@ header {
   max-height: 0;
   opacity: 0;
   visibility: hidden;
-  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
 }
 
 .updates-dropdown:hover .updates-menu {
@@ -195,7 +212,6 @@ header {
   background: #f1f1f1;
 }
 
-
 /* ========== Services Dropdown ========== */
 .services-dropdown {
   position: relative;
@@ -206,7 +222,7 @@ header {
   top: 120%;
   left: 0;
   background: white;
-  width: 500px;
+  width: 250px;
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -233,6 +249,7 @@ header {
 .services-menu a {
   text-decoration: none;
   color: black;
+  font-size: 14px;
   padding: 8px 12px;
   transition: background 0.3s ease;
 }
@@ -251,14 +268,15 @@ header {
   top: 120%;
   left: 0;
   background: white;
-  width: 180px;
+  width: 150px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   max-height: 0;
   opacity: 0;
   visibility: hidden;
-  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
 }
 
 .updates-dropdown:hover .updates-menu {
@@ -290,7 +308,6 @@ header {
   background: #f1f1f1;
 }
 
-
 .dropdown-icon {
   margin-left: 5px;
   font-size: 12px;
@@ -302,10 +319,7 @@ header {
   transform: rotate(180deg);
 }
 
-
-
 @media (max-width: 768px) {
-
   .navbar .links,
   .navbar .action_btn {
     display: none;

@@ -1,26 +1,28 @@
 .divStyle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40rem;
-    width: 100%;
-    background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40rem;
+  width: 100%;
+  background-repeat: no-repeat;
 }
-
+.slide-container {
+  max-width: 1600px;
+}
 .spanStyle {
-    padding: 20px;
-    background: #efefef;
-    color: #000000;
+  padding: 20px;
+  background: #efefef;
+  color: #000000;
 }
 
 @media (max-width: 768px) {
-    .divStyle {
-        height: 32rem;
-    }
+  .divStyle {
+    height: 32rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .divStyle {
-        height: 32rem;
-    }
+  .divStyle {
+    height: 32rem;
+  }
 }
